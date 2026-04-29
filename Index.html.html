@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grillbokning – BRF</title>
+  <meta name="description" content="Boka föreningens grill och uteplats." />
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --card: #fffaf0;
+      --text: #1f2933;
+      --muted: #5f6b76;
+      --accent: #8b5e34;
+      --accent-dark: #684421;
+      --border: #e6dccb;
+      --shadow: 0 16px 40px rgba(31, 41, 51, 0.10);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #fff5dd 0, var(--bg) 38%, #efe7da 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-card,
+    .info-card,
+    .calendar-card {
+      background: rgba(255, 250, 240, 0.86);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-card {
+      padding: clamp(28px, 5vw, 52px);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 7vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .quick-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+    }
+
+    .quick-card h2,
+    .info-card h2,
+    .calendar-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: fit-content;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-dark);
+      border: 1px solid var(--border);
+    }
+
+    .button.secondary:hover {
+      background: #fff3d6;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .info-card {
+      padding: 22px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .info-card ul,
+    .info-card ol {
+      margin: 10px 0 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    .info-card li + li {
+      margin-top: 6px;
+    }
+
+    .calendar-card {
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .calendar-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .calendar-frame {
+      width: 100%;
+      min-height: 680px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: white;
+    }
+
+    .placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      background: #fffdf8;
+    }
+
+    .placeholder strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .calendar-header {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .calendar-frame {
+        min-height: 560px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-card">
+        <p class="eyebrow">BRF • gemensam uteplats</p>
+        <h1 id="page-title">Grillbokning</h1>
+        <p class="lead">Här bokar du föreningens grill och uteplats. Kolla kalendern, välj en ledig tid och lägg in din bokning med namn och lägenhetsnummer.</p>
+        <div class="actions">
+          <a class="button" href="#kalender">Visa kalendern</a>
+          <a class="button secondary" href="#regler">Läs reglerna</a>
+        </div>
+      </div>
+
+      <aside class="hero-card quick-card" aria-labelledby="quick-title">
+        <div>
+          <h2 id="quick-title">Så bokar du</h2>
+          <ol>
+            <li>Öppna kalendern.</li>
+            <li>Välj en ledig tid.</li>
+            <li>Skriv namn, lägenhet och ungefärlig sluttid.</li>
+            <li>Avboka om du inte ska använda tiden.</li>
+          </ol>
+        </div>
+        <p class="lead">Tips: Lägg gärna bokningen i din egen kalender också.</p>
+      </aside>
+    </section>
+
+    <section class="grid" id="regler" aria-label="Regler och information">
+      <article class="info-card">
+        <h2>Bokningsregler</h2>
+        <ul>
+          <li>Max en aktiv bokning per hushåll åt gången.</li>
+          <li>Boka bara den tid du faktiskt tänker använda.</li>
+          <li>Vid ändrade planer: ta bort bokningen.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>Visa hänsyn</h2>
+        <ul>
+          <li>Håll ljudnivån rimlig, särskilt kvällstid.</li>
+          <li>Lämna grill och uteplats i fint skick.</li>
+          <li>Plocka undan skräp, flaskor och grillrester.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>Efter användning</h2>
+        <ul>
+          <li>Kontrollera att grillen är släckt.</li>
+          <li>Ställ tillbaka möbler om de flyttats.</li>
+          <li>Meddela styrelsen om något är trasigt.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="calendar-card" id="kalender" aria-labelledby="calendar-title">
+      <div class="calendar-header">
+        <div>
+          <h2 id="calendar-title">Bokningskalender</h2>
+          <p>Här ska föreningens Google Calendar bäddas in.</p>
+        </div>
+        <a class="button secondary" href="https://calendar.google.com/" target="_blank" rel="noopener">Öppna Google Kalender</a>
+      </div>
+
+      <!--
+        Byt ut hela div:en nedan mot Google Calendars iframe-kod.
+
+        Så gör du:
+        1. Skapa en Google-kalender, t.ex. "Grill & uteplats – BRF".
+        2. Gå till kalenderns inställningar.
+        3. Under "Integrera kalender" kopierar du iframe-koden.
+        4. Klistra in iframe-koden här och ta bort placeholder-div:en.
+      -->
+      <div class="calendar-frame placeholder">
+        <div>
+          <strong>Kalendern är inte inlagd ännu</strong>
+          Skapa en Google Calendar för grillbokningen och klistra in iframe-koden här.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>BRF grillbokning • Vid frågor, kontakta styrelsen.</p>
+    </footer>
+  </main>
+</body>
+</html>
